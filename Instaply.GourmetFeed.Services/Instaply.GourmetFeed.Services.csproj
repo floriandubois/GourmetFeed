@@ -5,7 +5,7 @@
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{282461a6-a9ad-4d48-b578-eabd8936d012}</ProjectGuid>
+    <ProjectGuid>{282461A6-A9AD-4D48-B578-EABD8936D012}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Instaply.GourmetFeed.Services</RootNamespace>
@@ -34,15 +34,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-  </ItemGroup>
-  <ItemGroup>
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Core\ApiEndpoints.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RestApiHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Instaply.GourmetFeed.Models\Instaply.GourmetFeed.Models.csproj">
+      <Project>{1fcf017a-ff0f-4fbb-ad3d-7ca57722a9d6}</Project>
+      <Name>Instaply.GourmetFeed.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -52,5 +64,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-
 </Project>
