@@ -6,6 +6,8 @@
         UserCannotBeNull,
         EmailAddressEmpty,
         PasswordEmpty,
-        EmailInvalid
+        EmailInvalid,
+        FirstNameEmpty,
+        LastNameEmpty
     }
 }

@@ -46,10 +46,11 @@ namespace Instaply.GourmetFeed.Services
                             message.Headers.Add("apiToken", "" + ApplicationContext.User.AccessToken);
 
                         HttpResponseMessage httpResponseMessage = await client.SendAsync(message);
+                        httpResponseMessage.EnsureSuccessStatusCode();
+
                         string stringResult = await httpResponseMessage.Content.ReadAsStringAsync();
 
                         taskResult = JsonConvert.DeserializeObject<T>(stringResult);
-
                         result.TrySetResult(taskResult);
                     }
                 }

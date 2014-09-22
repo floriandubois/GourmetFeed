@@ -1,26 +1,24 @@
-﻿<Page x:Class="Instaply.GourmetFeed.MainPage"
+﻿<Page x:Class="Instaply.GourmetFeed.CreateUserPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="using:Instaply.GourmetFeed"
+      xmlns:local="using:Instaply.GourmetFeed" d:DataContext="{d:DesignInstance viewModels:CreateAccountPageViewModel}"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:viewModels="using:Instaply.GourmetFeed.ViewModels"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-      d:DataContext="{d:DesignInstance viewModels:LoginPageViewModel}"
       mc:Ignorable="d">
 
     <Grid Background="{ThemeResource BackgroundImageBrush}">
-        <Border Margin="0,60" Background="{StaticResource GourmetFeedTransparencyOrange}">
+        <Border Margin="0,0" Background="{StaticResource GourmetFeedTransparencyOrange}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <StackPanel Margin="24" VerticalAlignment="Center">
+                <StackPanel Margin="12" VerticalAlignment="Center">
                     <TextBlock Style="{StaticResource TitleGourmet}" />
-                    <TextBlock Style="{StaticResource TitleSlogan}" />
-                    <Image Width="80" Source="Assets/farfalle.png" />
+                    <TextBlock Style="{StaticResource TitlesStyle}" Text="Create your account" FontSize="24" />
                 </StackPanel>
 
                 <Border Grid.Row="1"
@@ -30,6 +28,7 @@
                         Padding="12">
                     <Grid>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -51,10 +50,24 @@
                                      Password="{Binding User.Password,
                                                         Mode=TwoWay,
                                                         UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBox Header="First name" Grid.Row="2"
+                                     
+                                 IsEnabled="{Binding IsLoading,
+                                                     Converter={StaticResource InvertBooleanConverter}}"
+                                 Text="{Binding User.FirstName,
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBox Header="Last name" Grid.Row="3"
+                                     
+                                 IsEnabled="{Binding IsLoading,
+                                                     Converter={StaticResource InvertBooleanConverter}}"
+                                 Text="{Binding User.LastName,
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}" />
 
 
-                        <ProgressBar Grid.Row="2"
-                                     Height="4"
+                        <ProgressBar Grid.Row="4"
+                                     Height="5"
                                      HorizontalAlignment="Stretch"
                                      IsEnabled="False"
                                      IsIndeterminate="True"
@@ -62,17 +75,15 @@
                                      Visibility="{Binding IsLoading,
                                                           Converter={StaticResource BooleanToVisibilityConverter}}" />
 
-                        <Button Grid.Row="3"
+                        <Button Grid.Row="5"
                                 HorizontalAlignment="Center"
                                 Background="#5cb85c"
                                 BorderBrush="#4cae4c"
-                                Command="{Binding LoginCommand}"
-                                Content="log me in"
+                                Command="{Binding CreateAccountCommand}"
+                                Content="create my account"
                                 IsEnabled="{Binding IsLoading,
                                                     Converter={StaticResource InvertBooleanConverter}}"
                                 Padding="24,3" />
-
-                        <Button Grid.Row="4" Command="{Binding CreateAccountCommand}" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Content="Create my account" HorizontalAlignment="Center" FontSize="16" Foreground="{StaticResource GourmetFeedGreenDark}"></Button>
                     </Grid>
                 </Border>
             </Grid>

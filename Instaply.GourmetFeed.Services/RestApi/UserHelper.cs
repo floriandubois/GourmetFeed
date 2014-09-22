@@ -41,5 +41,10 @@ namespace Instaply.GourmetFeed.Services.RestApi
         {
             return await RestApiHelper.ExecuteAsync<User, User>(user, ApiEndpoints.Login, HttpMethod.Post);
         }
+
+        public async Task<User> Create(User user)
+        {
+            return await RestApiHelper.ExecuteAsync<User, User>(user, ApiEndpoints.CreateUser, HttpMethod.Post);
+        }
     }
 }

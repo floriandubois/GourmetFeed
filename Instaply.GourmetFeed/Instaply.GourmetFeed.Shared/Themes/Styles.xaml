@@ -36,18 +36,18 @@
         </Setter>
     </Style>
 
-    <Style x:Key="TitleGourmet" TargetType="TextBlock">
+    <Style x:Key="TitlesStyle" TargetType="TextBlock">
         <Setter Property="Foreground" Value="White"></Setter>
         <Setter Property="HorizontalAlignment" Value="Center"></Setter>
         <Setter Property="FontFamily" Value="Assets/Fonts/5455bfd4.clairehandbold-webfont.ttf#Claire Hand"></Setter>
+    </Style>
+
+    <Style x:Key="TitleGourmet" TargetType="TextBlock" BasedOn="{StaticResource TitlesStyle}">
         <Setter Property="FontSize" Value="66"></Setter>
         <Setter Property="Text" Value="GOURMET"></Setter>
     </Style>
 
-    <Style x:Key="TitleSlogan" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="White"></Setter>
-        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-        <Setter Property="FontFamily" Value="Assets/Fonts/5455bfd4.clairehandbold-webfont.ttf#Claire Hand"></Setter>
+    <Style x:Key="TitleSlogan" TargetType="TextBlock" BasedOn="{StaticResource TitlesStyle}">
         <Setter Property="FontSize" Value="34"></Setter>
         <Setter Property="Text" Value="THE FOOD LOG"></Setter>
     </Style>

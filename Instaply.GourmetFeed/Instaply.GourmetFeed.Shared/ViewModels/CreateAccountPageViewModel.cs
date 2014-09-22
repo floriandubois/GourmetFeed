@@ -11,7 +11,7 @@ using Instaply.GourmetFeed.Services.RestApi;
 
 namespace Instaply.GourmetFeed.ViewModels
 {
-    public class LoginPageViewModel : ViewModelBase
+    public class CreateAccountPageViewModel : ViewModelBase
     {
         #region Fields
 
@@ -47,45 +47,43 @@ namespace Instaply.GourmetFeed.ViewModels
 
         #region Commands
 
-        public RelayCommand LoginCommand { get; set; }
         public RelayCommand CreateAccountCommand { get; set; }
 
         #endregion
 
         #region Constructor
 
-        public LoginPageViewModel(Frame rootFrame, User user = null)
+        public CreateAccountPageViewModel(Frame rootFrame, User user = null)
         {
             _rootFrame = rootFrame;
             IsLoading = false;
 
             User = user ?? new User();
-
-            LoginCommand = new RelayCommand(() => { Login(); });
-            CreateAccountCommand = new RelayCommand(() => { CreateUSer(); });
+            User.IdentificationService = "1";
+            CreateAccountCommand = new RelayCommand(() => { CreateAccount(); });
         }
 
         #endregion
 
         #region Methods
 
-        private async void Login()
+        private async void CreateAccount()
         {
             if (User == null)
                 return;
 
-            eValidationValues validation = User.ValidateLogin();
+            eValidationValues validation = User.ValidateCreateUser();
             if (validation != eValidationValues.Valid)
             {
                 NotValidDisplay(validation);
                 return;
             }
+
             IsLoading = true;
             await Task.Delay(15);
             try
             {
-
-                var usr = await UserHelper.Instance.LogIn(User);
+                var usr = await UserHelper.Instance.Create(User);
                 ApplicationContext.User = usr;
                 IsLoading = false;
 
@@ -97,12 +95,6 @@ namespace Instaply.GourmetFeed.ViewModels
                 md.ShowAsync();
             }
 
-            IsLoading = false;
-        }
-
-        private async void CreateUSer()
-        {
-            _rootFrame.Navigate(typeof (CreateUserPage));
             IsLoading = false;
         }
 
@@ -119,6 +111,12 @@ namespace Instaply.GourmetFeed.ViewModels
                     break;
                 case eValidationValues.EmailInvalid:
                     message = "The email address is invalid";
+                    break;
+                case eValidationValues.FirstNameEmpty:
+                    message = "The first name cannot be empty";
+                    break;
+                case eValidationValues.LastNameEmpty:
+                    message = "The last name cannot be empty";
                     break;
                 default:
                     message = "";

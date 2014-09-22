@@ -12,7 +12,7 @@ namespace Instaply.GourmetFeed.Models
         /// </summary>
         public string Password { get; set; }
         /// <summary>
-        /// UID of the user
+        /// Identification method (0=Facebook, 1=Email)
         /// </summary>
         public string IdentificationService { get; set; }
         /// <summary>
