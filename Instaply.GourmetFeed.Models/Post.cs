@@ -48,6 +48,5 @@ namespace Instaply.GourmetFeed.Models
         /// Photos count in post
         /// </summary>
         public int Photos { get; set; }
-        public string PhotoUrl { get { return PhotoUrls[0]; } }
     }
 }
