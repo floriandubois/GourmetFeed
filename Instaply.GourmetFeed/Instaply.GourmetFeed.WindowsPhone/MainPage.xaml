@@ -1,81 +1,50 @@
-﻿<Page x:Class="Instaply.GourmetFeed.MainPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="using:Instaply.GourmetFeed"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:viewModels="using:Instaply.GourmetFeed.ViewModels"
-      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-      d:DataContext="{d:DesignInstance viewModels:LoginPageViewModel}"
-      mc:Ignorable="d">
+﻿<Page
+    x:Class="Instaply.GourmetFeed.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Instaply.GourmetFeed"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource BackgroundImageBrush}">
-        <Border Margin="0,60" Background="{StaticResource GourmetFeedTransparencyOrange}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+    <Grid Background="{ThemeResource HubBackgroundImageBrush}">
+        <Hub x:Name="Hub" x:Uid="Hub" Header="GourmetFeed" >
+            <HubSection x:Uid="HubSection1" Header="News" >
+                <DataTemplate>
+                    <ListView
+                        ItemsSource="{Binding Posts}"
+                        IsItemClickEnabled="True"
+                        ContinuumNavigationTransitionInfo.ExitElementContainer="True">
 
-                <StackPanel Margin="24" VerticalAlignment="Center">
-                    <TextBlock Style="{StaticResource TitleGourmet}" />
-                    <TextBlock Style="{StaticResource TitleSlogan}" />
-                    <Image Width="80" Source="Assets/farfalle.png" />
-                </StackPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,0,0,27.5">
+                                    <Image Source="{Binding PresentationPicture, Converter={StaticResource ImageUrlBuilderConverter}}"></Image>
+                                    <TextBlock Text="{Binding Title}" Style="{ThemeResource ListViewItemTextBlockStyle}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </DataTemplate>
+            </HubSection>
+            <HubSection x:Uid="HubSection1" Header="Your likes" >
+                <DataTemplate>
+                    <ListView
+                        ItemsSource="{Binding Posts}"
+                        IsItemClickEnabled="True"
+                        ContinuumNavigationTransitionInfo.ExitElementContainer="True">
 
-                <Border Grid.Row="1"
-                        Margin="48,0"
-                        VerticalAlignment="Top"
-                        Background="{StaticResource GourmetFeedInnerOrange}"
-                        Padding="12">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-
-                        <TextBox Header="Email address"
-                                 IsEnabled="{Binding IsLoading,
-                                                     Converter={StaticResource InvertBooleanConverter}}"
-                                 Text="{Binding User.Email,
-                                                Mode=TwoWay,
-                                                UpdateSourceTrigger=PropertyChanged}" />
-
-                        <PasswordBox Grid.Row="1"
-                                     Header="Password"
-                                     IsEnabled="{Binding IsLoading,
-                                                         Converter={StaticResource InvertBooleanConverter}}"
-                                     Password="{Binding User.Password,
-                                                        Mode=TwoWay,
-                                                        UpdateSourceTrigger=PropertyChanged}" />
-
-
-                        <ProgressBar Grid.Row="2"
-                                     Height="4"
-                                     HorizontalAlignment="Stretch"
-                                     IsEnabled="False"
-                                     IsIndeterminate="True"
-                                     Background="Transparent"
-                                     Visibility="{Binding IsLoading,
-                                                          Converter={StaticResource BooleanToVisibilityConverter}}" />
-
-                        <Button Grid.Row="3"
-                                HorizontalAlignment="Center"
-                                Background="#5cb85c"
-                                BorderBrush="#4cae4c"
-                                Command="{Binding LoginCommand}"
-                                Content="log me in"
-                                IsEnabled="{Binding IsLoading,
-                                                    Converter={StaticResource InvertBooleanConverter}}"
-                                Padding="24,3" />
-
-                        <Button Grid.Row="4" Command="{Binding CreateAccountCommand}" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Content="Create my account" HorizontalAlignment="Center" FontSize="16" Foreground="{StaticResource GourmetFeedGreenDark}"></Button>
-                    </Grid>
-                </Border>
-            </Grid>
-        </Border>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,0,0,27.5" Visibility="{Binding IsLiked, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <Image Source="{Binding PresentationPicture, Converter={StaticResource ImageUrlBuilderConverter}}"></Image>
+                                    <TextBlock Text="{Binding Title}" Style="{ThemeResource ListViewItemTextBlockStyle}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </DataTemplate>
+            </HubSection>
+        </Hub>
     </Grid>
 </Page>

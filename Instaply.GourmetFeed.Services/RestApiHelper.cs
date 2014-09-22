@@ -24,6 +24,27 @@ namespace Instaply.GourmetFeed.Services
             where T : new()
             where T2 : class
         {
+            var message = new HttpRequestMessage(method, ApiEndpoints.Version + endpoint);
+
+            if (source != null)
+            {
+                string json = JsonConvert.SerializeObject(source);
+                StringContent stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+                message.Content = stringContent;
+            }
+            return await ExecuteAsync<T>(message, endpoint, method);
+        }
+
+        public static async Task<T> ExecuteAsync<T>(string endpoint, HttpMethod method)
+            where T : new()
+        {
+            var message = new HttpRequestMessage(method, ApiEndpoints.Version + endpoint);
+            return await ExecuteAsync<T>(message, endpoint, method);
+        }
+
+        private static async Task<T> ExecuteAsync<T>(HttpRequestMessage message, string endpoint, HttpMethod method)
+            where T : new()
+        {
             dynamic taskResult = new T();
             TaskCompletionSource<T> result = new TaskCompletionSource<T>();
 
@@ -33,24 +54,14 @@ namespace Instaply.GourmetFeed.Services
                 {
                     using (var client = new HttpClient(handler) { BaseAddress = new Uri(ApiEndpoints.BaseUrl) })
                     {
-                        var message = new HttpRequestMessage(method, ApiEndpoints.Version + endpoint);
-
-                        if (source != null)
-                        {
-                            string json = JsonConvert.SerializeObject(source);
-                            StringContent stringContent = new StringContent(json, Encoding.UTF8, "application/json");
-                            message.Content = stringContent;
-                        }
-
                         if (ApplicationContext.User != null && !string.IsNullOrEmpty(ApplicationContext.User.AccessToken))
                             message.Headers.Add("apiToken", "" + ApplicationContext.User.AccessToken);
 
                         HttpResponseMessage httpResponseMessage = await client.SendAsync(message);
-                        httpResponseMessage.EnsureSuccessStatusCode();
-
                         string stringResult = await httpResponseMessage.Content.ReadAsStringAsync();
 
                         taskResult = JsonConvert.DeserializeObject<T>(stringResult);
+
                         result.TrySetResult(taskResult);
                     }
                 }

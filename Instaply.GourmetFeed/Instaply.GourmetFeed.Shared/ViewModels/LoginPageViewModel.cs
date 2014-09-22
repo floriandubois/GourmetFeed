@@ -89,6 +89,9 @@ namespace Instaply.GourmetFeed.ViewModels
                 ApplicationContext.User = usr;
                 IsLoading = false;
 
+#if WINDOWS_PHONE_APP
+            _rootFrame.Navigate(typeof (MainPage));
+#endif
                 return;
             }
             catch (Exception exception)
@@ -102,7 +105,9 @@ namespace Instaply.GourmetFeed.ViewModels
 
         private async void CreateUSer()
         {
+#if WINDOWS_PHONE_APP
             _rootFrame.Navigate(typeof (CreateUserPage));
+#endif
             IsLoading = false;
         }
 

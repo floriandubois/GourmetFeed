@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 using Instaply.GourmetFeed.Common;
 using Instaply.GourmetFeed.ViewModels;
 
@@ -50,7 +50,7 @@ namespace Instaply.GourmetFeed
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             _navigationHelper.OnNavigatedTo(e);
-            DataContext = new LoginPageViewModel(Frame);
+            DataContext = new MainPageViewModel(Frame);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

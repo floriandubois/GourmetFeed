@@ -87,6 +87,9 @@ namespace Instaply.GourmetFeed.ViewModels
                 ApplicationContext.User = usr;
                 IsLoading = false;
 
+#if WINDOWS_PHONE_APP
+            _rootFrame.Navigate(typeof (MainPage));
+#endif
                 return;
             }
             catch (Exception exception)

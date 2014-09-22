@@ -1,21 +1,20 @@
-﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Instaply.GourmetFeed.Themes"
-    xmlns:converters="using:Instaply.GourmetFeed.Common.Converters">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="using:Instaply.GourmetFeed.Common.Converters">
 
-    <converters:InvertBooleanConverter x:Key="InvertBooleanConverter"/>
-    <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    <converters:InvertBooleanConverter x:Key="InvertBooleanConverter" />
+    <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <converters:ImageUrlBuilderConverter x:Key="ImageUrlBuilderConverter" />
 
-    <SolidColorBrush x:Key="GourmetFeedOrange" Color="#FFFEAD46"/>
-    <SolidColorBrush x:Key="GourmetFeedTransparencyOrange" Color="#CCFEAD46"/>
-    <SolidColorBrush x:Key="GourmetFeedInnerOrange" Color="#FFFFC57A"/>
-    <SolidColorBrush x:Key="GourmetFeedForegroundGray" Color="#FF585858"/>
-    <SolidColorBrush x:Key="GourmetFeedGreenLight" Color="#5cb85c"/>
-    <SolidColorBrush x:Key="GourmetFeedGreenDark" Color="#4cae4c"/>
-    
+    <SolidColorBrush x:Key="GourmetFeedOrange" Color="#FFFEAD46" />
+    <SolidColorBrush x:Key="GourmetFeedTransparencyOrange" Color="#CCFEAD46" />
+    <SolidColorBrush x:Key="GourmetFeedInnerOrange" Color="#FFFFC57A" />
+    <SolidColorBrush x:Key="GourmetFeedForegroundGray" Color="#FF585858" />
+    <SolidColorBrush x:Key="GourmetFeedGreenLight" Color="#5cb85c" />
+    <SolidColorBrush x:Key="GourmetFeedGreenDark" Color="#4cae4c" />
+
     <Style TargetType="TextBox">
-        <Setter Property="Foreground" Value="{StaticResource GourmetFeedForegroundGray}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource GourmetFeedForegroundGray}" />
         <Setter Property="HeaderTemplate">
             <Setter.Value>
                 <DataTemplate>
@@ -26,7 +25,7 @@
     </Style>
 
     <Style TargetType="PasswordBox">
-        <Setter Property="Foreground" Value="{StaticResource GourmetFeedForegroundGray}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource GourmetFeedForegroundGray}" />
         <Setter Property="HeaderTemplate">
             <Setter.Value>
                 <DataTemplate>
@@ -37,24 +36,33 @@
     </Style>
 
     <Style x:Key="TitlesStyle" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="White"></Setter>
-        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-        <Setter Property="FontFamily" Value="Assets/Fonts/5455bfd4.clairehandbold-webfont.ttf#Claire Hand"></Setter>
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="Assets/Fonts/5455bfd4.clairehandbold-webfont.ttf#Claire Hand" />
     </Style>
 
-    <Style x:Key="TitleGourmet" TargetType="TextBlock" BasedOn="{StaticResource TitlesStyle}">
-        <Setter Property="FontSize" Value="66"></Setter>
-        <Setter Property="Text" Value="GOURMET"></Setter>
+    <Style x:Key="TitleGourmet"
+           BasedOn="{StaticResource TitlesStyle}"
+           TargetType="TextBlock">
+        <Setter Property="FontSize" Value="66" />
+        <Setter Property="Text" Value="GOURMET" />
     </Style>
 
-    <Style x:Key="TitleSlogan" TargetType="TextBlock" BasedOn="{StaticResource TitlesStyle}">
-        <Setter Property="FontSize" Value="34"></Setter>
-        <Setter Property="Text" Value="THE FOOD LOG"></Setter>
+    <Style x:Key="TitleSlogan"
+           BasedOn="{StaticResource TitlesStyle}"
+           TargetType="TextBlock">
+        <Setter Property="FontSize" Value="34" />
+        <Setter Property="Text" Value="THE FOOD LOG" />
     </Style>
 
     <ImageBrush x:Key="BackgroundImageBrush"
-                                ImageSource="../Assets/bg.jpg"
-                                Opacity="0.8"
-                                Stretch="UniformToFill" />
-    
+                ImageSource="../Assets/bg.jpg"
+                Opacity="0.8"
+                Stretch="UniformToFill" />
+
+    <ImageBrush x:Key="HubBackgroundImageBrush"
+                ImageSource="../Assets/bg.jpg"
+                Opacity="0.3"
+                Stretch="UniformToFill" />
+
 </ResourceDictionary>

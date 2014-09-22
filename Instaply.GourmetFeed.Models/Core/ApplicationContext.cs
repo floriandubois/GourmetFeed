@@ -7,5 +7,7 @@ namespace Instaply.GourmetFeed.Models.Core
         /// Represent the current user
         /// </summary>
         public static User User { get; set; }
+
+        public static string ImagesRootUrl { get; set; }
     }
 }
