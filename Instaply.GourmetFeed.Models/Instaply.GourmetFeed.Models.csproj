@@ -45,6 +45,7 @@
     <Compile Include="Core\eValidationValues.cs" />
     <Compile Include="Core\ExtensionMethods.cs" />
     <Compile Include="Core\ViewModelBase.cs" />
+    <Compile Include="Extensions\PostDetails.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />

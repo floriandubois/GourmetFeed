@@ -5,6 +5,7 @@
     xmlns:local="using:Instaply.GourmetFeed"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:common="using:Instaply.GourmetFeed.Common"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource HubBackgroundImageBrush}">
@@ -13,9 +14,9 @@
                 <DataTemplate>
                     <ListView
                         ItemsSource="{Binding Posts}"
-                        IsItemClickEnabled="True"
+                        IsItemClickEnabled="True" common:ItemClickCommand.Command="{Binding ViewPostDetailsCommand}"
                         ContinuumNavigationTransitionInfo.ExitElementContainer="True">
-
+                       
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Margin="0,0,0,27.5">

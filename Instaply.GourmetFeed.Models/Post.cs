@@ -19,7 +19,7 @@ namespace Instaply.GourmetFeed.Models
         public List<PostDetails> Posts { get; set; }
     }
 
-    public class PostDetails
+    public partial class PostDetails
     {
         /// <summary>
         /// Title of the post
@@ -49,34 +49,7 @@ namespace Instaply.GourmetFeed.Models
         /// Photos count in post
         /// </summary>
         public int Photos { get; set; }
-        /// <summary>
-        /// URL of the photos
-        /// </summary>
-        public string PresentationPicture
-        {
-            get
-            {
-                if (PhotoUrls != null && PhotoUrls.Any())
-                    return PhotoUrls[0];
-
-                return "";
-            }
-        }
 
         public User[] LikingUsers{ get; set; }
-
-        /// <summary>
-        /// URL of the photos
-        /// </summary>
-        public bool IsLiked
-        {
-            get
-            {
-                if (LikingUsers != null && LikingUsers.Any())
-                    return LikingUsers.Any(x=>x.FirstName==ApplicationContext.User.FirstName);
-
-                return false;
-            }
-        }
     }
 }

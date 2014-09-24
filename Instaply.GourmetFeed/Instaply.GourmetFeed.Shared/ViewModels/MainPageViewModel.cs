@@ -1,31 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Popups;
-using Windows.UI.Xaml.Controls;
-using Instaply.GourmetFeed.Common;
+﻿using Instaply.GourmetFeed.Common;
 using Instaply.GourmetFeed.Models;
 using Instaply.GourmetFeed.Models.Core;
 using Instaply.GourmetFeed.Services.RestApi;
+using System.Collections.ObjectModel;
+using Windows.UI.Xaml.Controls;
 
 namespace Instaply.GourmetFeed.ViewModels
 {
-   public class MainPageViewModel : ViewModelBase
+    public class MainPageViewModel : ViewModelBase
     {
         #region Field
 
         private readonly Frame _rootFrame;
         private ObservableCollection<PostDetails> _posts;
-       private bool _isLoading;
+        private bool _isLoading;
 
-       #endregion
+        #endregion
 
         #region Commands
 
         public RelayCommand LoadPostsCommand { get; set; }
-        
+
         #endregion
 
         #region Properties
@@ -49,7 +44,7 @@ namespace Instaply.GourmetFeed.ViewModels
                 OnPropertyChanged();
             }
         }
-        
+
         #endregion
 
         #region Constructor
@@ -65,7 +60,7 @@ namespace Instaply.GourmetFeed.ViewModels
             if (postDetails == null)
                 LoadPosts();
         }
-        
+
         #endregion
 
         #region Methods
@@ -73,12 +68,11 @@ namespace Instaply.GourmetFeed.ViewModels
         private async void LoadPosts()
         {
             IsLoading = true;
-            Post posts = null;
             if (ApplicationContext.User == null)
 #if WINDOWS_PHONE_APP
                 _rootFrame.Navigate(typeof(LoginPage));
 #endif
-            posts = await PostsHelper.Instance.LoadPosts();
+            Post posts = await PostsHelper.Instance.LoadPosts();
             if (posts == null)
             {
                 IsLoading = false;
@@ -87,7 +81,7 @@ namespace Instaply.GourmetFeed.ViewModels
             ApplicationContext.ImagesRootUrl = posts.ImagesRootUrl;
             Posts = new ObservableCollection<PostDetails>(posts.Posts);
         }
-        
+
         #endregion
     }
 }
