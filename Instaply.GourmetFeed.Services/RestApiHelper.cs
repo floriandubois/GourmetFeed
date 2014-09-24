@@ -19,7 +19,7 @@ namespace Instaply.GourmetFeed.Services
         /// <param name="source">input parameter. Will be serialized to json prior to send to backend</param>
         /// <param name="endpoint">endpoint address to contact</param>
         /// <param name="method">HttpMethod for the call</param>
-        /// <returns></returns>
+        /// <returns>Object of type T</returns>
         public static async Task<T> ExecuteAsync<T, T2>(T2 source, string endpoint, HttpMethod method)
             where T : new()
             where T2 : class
@@ -32,17 +32,30 @@ namespace Instaply.GourmetFeed.Services
                 StringContent stringContent = new StringContent(json, Encoding.UTF8, "application/json");
                 message.Content = stringContent;
             }
-            return await ExecuteAsync<T>(message, endpoint, method);
+            return await ExecuteAsync<T>(message);
         }
 
+        /// <summary>
+        /// Contact the service and retrieving a casted object T
+        /// </summary>
+        /// <typeparam name="T">output type (converted from json sended by backend)</typeparam>
+        /// <param name="endpoint">endpoint address to contact</param>
+        /// <param name="method">HttpMethod for the call</param>
+        /// <returns>Object of type T</returns>
         public static async Task<T> ExecuteAsync<T>(string endpoint, HttpMethod method)
             where T : new()
         {
             var message = new HttpRequestMessage(method, ApiEndpoints.Version + endpoint);
-            return await ExecuteAsync<T>(message, endpoint, method);
+            return await ExecuteAsync<T>(message);
         }
 
-        private static async Task<T> ExecuteAsync<T>(HttpRequestMessage message, string endpoint, HttpMethod method)
+        /// <summary>
+        /// Contact the service and retrieving a casted object T
+        /// </summary>
+        /// <typeparam name="T">output type (converted from json sended by backend)</typeparam>
+        /// <param name="message">http message to send</param>
+        /// <returns>Object of type T</returns>
+        private static async Task<T> ExecuteAsync<T>(HttpRequestMessage message)
             where T : new()
         {
             dynamic taskResult = new T();
