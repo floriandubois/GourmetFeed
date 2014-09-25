@@ -14,7 +14,7 @@
                 <DataTemplate>
                     <ListView
                         ItemsSource="{Binding Posts}"
-                        IsItemClickEnabled="True" common:ItemClickCommand.Command="{Binding ViewPostDetailsCommand}"
+                        IsItemClickEnabled="True" 
                         ContinuumNavigationTransitionInfo.ExitElementContainer="True">
                        
                         <ListView.ItemTemplate>

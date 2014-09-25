@@ -68,11 +68,12 @@ namespace Instaply.GourmetFeed.ViewModels
         private async void LoadPosts()
         {
             IsLoading = true;
+            Post posts=null;
             if (ApplicationContext.User == null)
 #if WINDOWS_PHONE_APP
                 _rootFrame.Navigate(typeof(LoginPage));
 #endif
-            Post posts = await PostsHelper.Instance.LoadPosts();
+            posts = await PostsHelper.Instance.LoadPosts();
             if (posts == null)
             {
                 IsLoading = false;
